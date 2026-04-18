@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { Body, Controller, Get, Param, Patch, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, Put } from '@nestjs/common';
 import { StudentsService } from './students.service';
 import { CreateStudentDto } from './dto/create-student.dto';
 import { StudentDocument } from './student.schema';
@@ -30,7 +30,7 @@ export class StudentsController {
         @Body() data: UpdateStudentDto
     ) {
         return this.studentService.updatePatchStudent(id, data);
-    }
+    };
 
     @Put(':id')
     async updatePutStudent(
@@ -38,5 +38,10 @@ export class StudentsController {
         @Body() data: CreateStudentDto
     ) {
         return this.studentService.updatePutStudent(id, data);
-    }
+    };
+
+    @Delete(':id')
+    async deleteStudent(@Param('id') id: string) {
+        return this.studentService.deleteStudent(id)
+    };
 }

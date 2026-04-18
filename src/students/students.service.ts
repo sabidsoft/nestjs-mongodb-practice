@@ -27,9 +27,13 @@ export class StudentsService {
 
     async updatePatchStudent(id: string, data: UpdateStudentDto): Promise<StudentDocument | null> {
         return this.studentModel.findByIdAndUpdate(id, data, { new: true, runValidators: true }).exec();
-    }
+    };
 
     async updatePutStudent(id: string, data: CreateStudentDto): Promise<UpdateResult> {
         return this.studentModel.replaceOne({ _id: id }, data, { runValidators: true });
-    }
+    };
+
+    async deleteStudent(id: string): Promise<StudentDocument | null> {
+        return this.studentModel.findByIdAndDelete(id).exec();
+    };
 }
