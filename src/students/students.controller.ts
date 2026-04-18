@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
+import { Body, Controller, Get, Param, Patch, Post, Put } from '@nestjs/common';
 import { StudentsService } from './students.service';
 import { CreateStudentDto } from './dto/create-student.dto';
 import { StudentDocument } from './student.schema';
@@ -24,11 +24,19 @@ export class StudentsController {
         return this.studentService.createStudent(data);
     };
 
-    @Put(':id')
-    async updateStudent(
+    @Patch(':id')
+    async updatePatchStudent(
         @Param('id') id: string,
         @Body() data: UpdateStudentDto
     ) {
-        return this.studentService.updateStudent(id, data);
+        return this.studentService.updatePatchStudent(id, data);
+    }
+
+    @Put(':id')
+    async updatePutStudent(
+        @Param('id') id: string,
+        @Body() data: CreateStudentDto
+    ) {
+        return this.studentService.updatePutStudent(id, data);
     }
 }
